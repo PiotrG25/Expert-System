@@ -1,4 +1,4 @@
-package dekompositionToSimpleFractions;
+package polynomials;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.List;
 public class Polynomial {
     private List<Monomial> monomials;
     private int degree;
+
+    //todo add
+    //todo subtract
+    //todo dividing polynomials
+    //todo restFromDivision
+    //todo multiply polynomials
 
 
     public Polynomial(){
@@ -44,4 +50,5 @@ public class Polynomial {
             }
         }
     }
+
 }

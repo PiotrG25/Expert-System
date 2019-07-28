@@ -1,4 +1,4 @@
-package dekompositionToSimpleFractions;
+package polynomials;
 
 public class Monomial {
     // a * x^n
