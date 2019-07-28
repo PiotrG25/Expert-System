@@ -34,8 +34,27 @@ public class Main {
 
 
         Rational f = new Rational(3, 2),
-                g = new Rational(15, 10);
+                g = new Rational(15, 4);
         System.out.println(f);
         System.out.println(g);
+
+        Monomial m = new Monomial(f, 2),
+                n = new Monomial(g, 3);
+        System.out.println(m);
+        System.out.println(n);
+        m.multiply(n);
+        System.out.println(m);
+        System.out.println(n);
+        m = n.resultOfMultiplication(m);
+        System.out.println(m);
+        System.out.println(n);
+        m.divide(n);
+        System.out.println(m);
+        System.out.println(n);
+        m = n.resultOfDivision(m);
+        System.out.println(m);
+        System.out.println(n);
+
+
     }
 }
