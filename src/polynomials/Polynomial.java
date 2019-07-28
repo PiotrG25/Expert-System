@@ -7,8 +7,6 @@ public class Polynomial {
     private List<Monomial> monomials;
     private int degree;
 
-    //todo add
-    //todo subtract
     //todo dividing polynomials
     //todo restFromDivision
     //todo multiply polynomials
@@ -31,14 +29,15 @@ public class Polynomial {
             }
         }
     }
-    public List<Monomial> getMonomials() {
-        return monomials;
-    }
+
     public void addMonomial(Monomial m){
         boolean toAdd = true;
         for(int i = 0; i < monomials.size(); i++){
             if(monomials.get(i).n == m.n){
                 monomials.get(i).a += m.a;
+                if(monomials.get(i).a == 0){
+                    monomials.remove(i);
+                }
                 toAdd = false;
                 break;
             }
@@ -50,5 +49,44 @@ public class Polynomial {
             }
         }
     }
+
+    public List<Monomial> getMonomials() {
+        return monomials;
+    }
+    public void setMonomials(List<Monomial> monomials) {
+        this.monomials = monomials;
+    }
+
+    public void add(Polynomial p){
+        for(Monomial m : p.getMonomials()){
+            this.addMonomial(m);
+        }
+    }
+    public void subtract(Polynomial p){
+        for(Monomial m : p.getMonomials()){
+            this.addMonomial(new Monomial(-m.a, m.n));
+        }
+    }
+
+    public void multiply(Polynomial p){
+        Polynomial result = new Polynomial();
+
+        for(int i = 0; i < monomials.size(); i++){
+            for(int j = 0; j < p.getMonomials().size(); j++){
+                result.addMonomial(new Monomial(monomials.get(i).a * p.getMonomials().get(j).a, monomials.get(i).n + p.getMonomials().get(j).n));
+            }
+        }
+
+        monomials = result.monomials;
+    }
+
+/*
+    public Polynomial resultOfDivision(Polynomial p){
+
+    }
+    public Polynomial restOfDivision(Polynomial p){
+
+    }
+    */
 
 }
