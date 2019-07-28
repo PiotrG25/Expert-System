@@ -2,6 +2,12 @@ import numbers.Rational;
 import polynomials.Monomial;
 import polynomials.Polynomial;
 
+
+//todo dont use basic methods in resultOf methods, Rational & Monomial &| Polynomial
+//todo use copyOf insted of addMonomial in resultOf methods in Polynomial
+//todo
+//todo
+//todo
 public class Main {
     public static void main(String[] args) {
         Polynomial p = new Polynomial();
@@ -40,18 +46,6 @@ public class Main {
 
         Monomial m = new Monomial(f, 2),
                 n = new Monomial(g, 3);
-        System.out.println(m);
-        System.out.println(n);
-        m.multiply(n);
-        System.out.println(m);
-        System.out.println(n);
-        m = n.resultOfMultiplication(m);
-        System.out.println(m);
-        System.out.println(n);
-        m.divide(n);
-        System.out.println(m);
-        System.out.println(n);
-        m = n.resultOfDivision(m);
         System.out.println(m);
         System.out.println(n);
 
