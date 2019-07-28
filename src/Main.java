@@ -1,3 +1,4 @@
+import numbers.Rational;
 import polynomials.Monomial;
 import polynomials.Polynomial;
 
@@ -31,6 +32,14 @@ public class Main {
             System.out.println(m);
         }
 
+
+        Rational f = new Rational(3, 2),
+                g = new Rational(15, 10);
+        System.out.println(f);
+        System.out.println(g);
+        f.add(g);
+        System.out.println(f);
+        System.out.println(g);
 
     }
 }

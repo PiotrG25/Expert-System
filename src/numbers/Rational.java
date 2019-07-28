@@ -17,7 +17,7 @@ public class Rational {
         this.numerator *= r.denominator;
         this.denominator *= r.denominator;
 
-        this.numerator += r.denominator * den;
+        this.numerator += r.numerator * den;
 
         if(numerator != 0)
             toProperFriction();
