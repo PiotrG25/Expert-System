@@ -1,5 +1,5 @@
-import dekompositionToSimpleFractions.Monomial;
-import dekompositionToSimpleFractions.Polynomial;
+import polynomials.Monomial;
+import polynomials.Polynomial;
 
 public class Main {
     public static void main(String[] args) {
