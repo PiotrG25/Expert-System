@@ -69,7 +69,6 @@ public class Polynomial {
             this.addMonomial(new Monomial(new Rational(-m.a.numerator, m.a.denominator), m.n));
         }
     }
-
     public void multiply(Polynomial p){
         Polynomial result = new Polynomial();
 
@@ -86,7 +85,6 @@ public class Polynomial {
 
         monomials = result.monomials;
     }
-
 /*
     public Polynomial resultOfDivision(Polynomial p){
 
@@ -94,6 +92,6 @@ public class Polynomial {
     public Polynomial restOfDivision(Polynomial p){
 
     }
-    */
+*/
 
 }

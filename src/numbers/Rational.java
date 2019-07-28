@@ -19,12 +19,86 @@ public class Rational {
 
         this.numerator += r.numerator * den;
 
-        if(numerator != 0)
-            toProperFriction();
-        else
-            denominator = 1;
+        toProperFriction();
     }
+    public Rational resultOfAddition(Rational r){
+        long num = numerator;
+        long den = denominator;
+
+        this.add(r);
+        Rational result = new Rational(this.numerator, this.denominator);
+
+        this.numerator = num;
+        this.denominator = den;
+
+        return result;
+    }
+
+    public void subtract(Rational r){
+        long den = denominator;
+
+        this.numerator *= r.denominator;
+        this.denominator *= r.denominator;
+
+        this.numerator -= r.numerator * den;
+
+        toProperFriction();
+    }
+    public Rational resultOfSubtraction(Rational r){
+        long num = numerator;
+        long den = denominator;
+
+        this.subtract(r);
+        Rational result = new Rational(this.numerator, this.denominator);
+
+        this.numerator = num;
+        this.denominator = den;
+
+        return result;
+    }
+
+    public void multiply(Rational r){
+        numerator *= r.numerator;
+        denominator *= r.denominator;
+
+        toProperFriction();
+    }
+    public Rational resultOfMultiplication(Rational r){
+        long num = numerator;
+        long den = denominator;
+
+        this.multiply(r);
+        Rational result = new Rational(this.numerator, this.denominator);
+
+        this.numerator = num;
+        this.denominator = den;
+
+        return result;
+    }
+
+    public void divide(Rational r){
+        this.multiply(new Rational(r.denominator, r.numerator));
+    }
+    public Rational resultOfDivision(Rational r){
+        long num = numerator;
+        long den = denominator;
+
+        this.divide(r);
+        Rational result = new Rational(this.numerator, this.denominator);
+
+        this.numerator = num;
+        this.denominator = den;
+
+        return result;
+    }
+
+
     public void toProperFriction(){
+        if(numerator == 0){
+            denominator = 1;
+            return;
+        }
+
         long min;
         if(denominator < numerator){
             min = denominator;
@@ -39,6 +113,7 @@ public class Rational {
             }
         }
     }
+
 
     @Override
     public String toString() {

@@ -16,6 +16,7 @@ public class Monomial {
         this.n = n;
     }
 
+
     @Override
     public String toString() {
         return a.toString() + " * x ^ " + n;

@@ -37,9 +37,5 @@ public class Main {
                 g = new Rational(15, 10);
         System.out.println(f);
         System.out.println(g);
-        f.add(g);
-        System.out.println(f);
-        System.out.println(g);
-
     }
 }
