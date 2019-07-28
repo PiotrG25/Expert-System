@@ -11,14 +11,14 @@ public class Main {
         p.addMonomial(new Monomial(2, 2));
         p.sort();
         for(Monomial m : p.getMonomials()){
-            System.out.println(m.a + " x^" + m.n);
+            System.out.println(m);
         }
         System.out.println(p.getMonomials().size());
 
         p.addMonomial(new Monomial(-3, 1));
         p.sort();
         for(Monomial m : p.getMonomials()){
-            System.out.println(m.a + " x^" + m.n);
+            System.out.println(m);
         }
         System.out.println(p.getMonomials().size());
 
@@ -28,7 +28,7 @@ public class Main {
         p.multiply(r);
         p.sort();
         for(Monomial m : p.getMonomials()){
-            System.out.println(m.a + " x^" + m.n);
+            System.out.println(m);
         }
 
 

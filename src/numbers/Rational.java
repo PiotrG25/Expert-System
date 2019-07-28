@@ -11,11 +11,37 @@ public class Rational {
     }
 
 
+    public void add(Rational r){
+        long den = this.denominator;
+
+        this.numerator *= r.denominator;
+        this.denominator *= r.denominator;
+
+        this.numerator += r.denominator * den;
+
+        if(numerator != 0)
+            toProperFriction();
+        else
+            denominator = 1;
+    }
     public void toProperFriction(){
-        //todo
+        long min;
+        if(denominator < numerator){
+            min = denominator;
+        }else{
+            min = numerator;
+        }
+        for(long i = min; i >= 2; i--){
+            if(numerator % i == 0 && denominator % i == 0){
+                numerator /= i;
+                denominator /= i;
+                break;
+            }
+        }
     }
 
-    public static void from(double d){
-        //todo
+    @Override
+    public String toString() {
+        return numerator + " / " + denominator;
     }
 }

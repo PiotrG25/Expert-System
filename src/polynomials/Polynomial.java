@@ -1,5 +1,7 @@
 package polynomials;
 
+import numbers.Rational;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +36,8 @@ public class Polynomial {
         boolean toAdd = true;
         for(int i = 0; i < monomials.size(); i++){
             if(monomials.get(i).n == m.n){
-                monomials.get(i).a += m.a;
-                if(monomials.get(i).a == 0){
+                monomials.get(i).a.add(m.a);
+                if(monomials.get(i).a.numerator == 0){
                     monomials.remove(i);
                 }
                 toAdd = false;
@@ -64,7 +66,7 @@ public class Polynomial {
     }
     public void subtract(Polynomial p){
         for(Monomial m : p.getMonomials()){
-            this.addMonomial(new Monomial(-m.a, m.n));
+            this.addMonomial(new Monomial(new Rational(-m.a.numerator, m.a.denominator), m.n));
         }
     }
 
@@ -72,8 +74,13 @@ public class Polynomial {
         Polynomial result = new Polynomial();
 
         for(int i = 0; i < monomials.size(); i++){
+            Rational ai = monomials.get(i).a;
             for(int j = 0; j < p.getMonomials().size(); j++){
-                result.addMonomial(new Monomial(monomials.get(i).a * p.getMonomials().get(j).a, monomials.get(i).n + p.getMonomials().get(j).n));
+                Rational aj = p.getMonomials().get(j).a;
+
+                Rational r = new Rational(ai.numerator * aj.numerator, ai.denominator * aj.denominator);
+                r.toProperFriction();
+                result.addMonomial(new Monomial(r , monomials.get(i).n + p.getMonomials().get(j).n));
             }
         }
 
