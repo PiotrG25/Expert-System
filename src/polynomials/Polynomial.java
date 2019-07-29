@@ -64,7 +64,7 @@ public class Polynomial {
         }
     }
     public Polynomial resultOfAddition(Polynomial p){
-        Polynomial result = Polynomial.copyOf(this);
+        Polynomial result = (Polynomial)this.clone();
         for(Monomial m : p.getMonomials()){
             result.addMonomial(m);
         }
@@ -77,7 +77,7 @@ public class Polynomial {
         }
     }
     public Polynomial resultOfSubtraction(Polynomial p){
-        Polynomial result = Polynomial.copyOf(this);
+        Polynomial result = (Polynomial)this.clone();
         for(Monomial m : p.getMonomials()){
             result.addMonomial(new Monomial(new Rational(-m.a.numerator, m.a.denominator), m.n));
         }
@@ -110,14 +110,14 @@ public class Polynomial {
     }*/
 
 
-    public static Polynomial copyOf(Polynomial p){
+    @Override
+    public Object clone(){
         Polynomial result = new Polynomial();
         List<Monomial> monomials = new ArrayList<>();
-        for(Monomial m : p.getMonomials()){
+        for(Monomial m : this.monomials){
             monomials.add((Monomial)m.clone());
         }
         result.setMonomials(monomials);
         return result;
     }
-
 }
