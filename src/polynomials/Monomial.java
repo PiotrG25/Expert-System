@@ -35,10 +35,10 @@ public class Monomial {
     }
 
 
-    public static Monomial copyOf(Monomial m){
-        return new Monomial(Rational.copyOf(m.a), m.n);
+    @Override
+    public Object clone() {
+        return new Monomial((Rational) a.clone(), n);
     }
-
 
     @Override
     public String toString() {

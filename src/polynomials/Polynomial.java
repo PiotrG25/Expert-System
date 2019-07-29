@@ -41,7 +41,7 @@ public class Polynomial {
             }
         }
         if(toAdd){
-            monomials.add(Monomial.copyOf(m));
+            monomials.add((Monomial)m.clone());
         }
     }
 
@@ -102,22 +102,19 @@ public class Polynomial {
 /*
     public Polynomial resultOfDivision(Polynomial p){
         Polynomial result = new Polynomial();
-        Polynomial currentDivident = new Polynomial();
-        for(Monomial m : monomials){
-            currentDivident.addMonomial(m);
-        }
+        Polynomial currentDivident = Polynomial.copyOf(this);
 
     }
     public Polynomial restOfDivision(Polynomial p){
 
-    }
-*/
+    }*/
+
 
     public static Polynomial copyOf(Polynomial p){
         Polynomial result = new Polynomial();
         List<Monomial> monomials = new ArrayList<>();
         for(Monomial m : p.getMonomials()){
-            monomials.add(Monomial.copyOf(m));
+            monomials.add((Monomial)m.clone());
         }
         result.setMonomials(monomials);
         return result;

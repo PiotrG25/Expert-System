@@ -89,10 +89,10 @@ public class Rational {
     }
 
 
-    public static Rational copyOf(Rational r){
-        return new Rational(r.numerator, r.denominator);
+    @Override
+    public Object clone() {
+        return new Rational(numerator, denominator);
     }
-
 
     @Override
     public String toString() {
