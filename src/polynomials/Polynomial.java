@@ -41,7 +41,7 @@ public class Polynomial {
             }
         }
         if(toAdd){
-            monomials.add(new Monomial(new Rational(m.a.numerator, m.a.denominator), m.n));
+            monomials.add(Monomial.copyOf(m));
         }
     }
 
@@ -53,6 +53,9 @@ public class Polynomial {
     public List<Monomial> getMonomials() {
         return monomials;
     }
+    public void setMonomials(List<Monomial> monomials) {
+        this.monomials = monomials;
+    }
 
 
     public void add(Polynomial p){
@@ -61,19 +64,10 @@ public class Polynomial {
         }
     }
     public Polynomial resultOfAddition(Polynomial p){
-        Polynomial before = new Polynomial();
-        for(Monomial m : monomials){
-            before.addMonomial(m);
-        }
-
-        this.add(p);
-        Polynomial result = new Polynomial();
-        for(Monomial m : monomials){
+        Polynomial result = Polynomial.copyOf(this);
+        for(Monomial m : p.getMonomials()){
             result.addMonomial(m);
         }
-
-        this.monomials = before.monomials;
-
         return result;
     }
 
@@ -83,47 +77,23 @@ public class Polynomial {
         }
     }
     public Polynomial resultOfSubtraction(Polynomial p){
-        Polynomial before = new Polynomial();
-        for(Monomial m : monomials){
-            before.addMonomial(m);
+        Polynomial result = Polynomial.copyOf(this);
+        for(Monomial m : p.getMonomials()){
+            result.addMonomial(new Monomial(new Rational(-m.a.numerator, m.a.denominator), m.n));
         }
-
-        this.subtract(p);
-        Polynomial result = new Polynomial();
-        for(Monomial m : monomials){
-            result.addMonomial(m);
-        }
-
-        this.monomials = before.monomials;
-
         return result;
     }
 
     public void multiply(Polynomial p){
-        Polynomial result = new Polynomial();
-
-        for(int i = 0; i < monomials.size(); i++){
-            for(int j = 0; j < p.getMonomials().size(); j++){
-                result.addMonomial(monomials.get(i).resultOfMultiplication(p.getMonomials().get(j)));
-            }
-        }
-
-        monomials = result.monomials;
+        this.monomials = resultOfMultiplication(p).getMonomials();
     }
     public Polynomial resultOfMultiplication(Polynomial p){
-        Polynomial before = new Polynomial();
-        for(Monomial m : monomials){
-            before.addMonomial(m);
-        }
-
-        this.multiply(p);
         Polynomial result = new Polynomial();
-        for(Monomial m : monomials){
-            result.addMonomial(m);
+        for(Monomial m : this.monomials){
+            for(Monomial n : p.getMonomials()){
+                result.addMonomial(m.resultOfMultiplication(n));
+            }
         }
-
-        this.monomials = before.monomials;
-
         return result;
     }
 
@@ -143,5 +113,14 @@ public class Polynomial {
     }
 */
 
+    public static Polynomial copyOf(Polynomial p){
+        Polynomial result = new Polynomial();
+        List<Monomial> monomials = new ArrayList<>();
+        for(Monomial m : p.getMonomials()){
+            monomials.add(Monomial.copyOf(m));
+        }
+        result.setMonomials(monomials);
+        return result;
+    }
 
 }

@@ -2,9 +2,10 @@ import numbers.Rational;
 import polynomials.Monomial;
 import polynomials.Polynomial;
 
+import java.util.ArrayList;
+import java.util.List;
 
-//todo dont use basic methods in resultOf methods, Rational & Monomial &| Polynomial
-//todo use copyOf insted of addMonomial in resultOf methods in Polynomial
+
 //todo
 //todo
 //todo

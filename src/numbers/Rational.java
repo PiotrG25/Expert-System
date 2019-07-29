@@ -8,6 +8,7 @@ public class Rational {
     public Rational(long numerator, long denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
+        toProperFriction();
     }
 
 
@@ -16,21 +17,13 @@ public class Rational {
 
         this.numerator *= r.denominator;
         this.denominator *= r.denominator;
-
         this.numerator += r.numerator * den;
 
         toProperFriction();
     }
     public Rational resultOfAddition(Rational r){
-        long num = numerator;
-        long den = denominator;
-
-        this.add(r);
-        Rational result = new Rational(this.numerator, this.denominator);
-
-        this.numerator = num;
-        this.denominator = den;
-
+        Rational result = new Rational(this.numerator * r.denominator + r.numerator * this.denominator, this.denominator * r.denominator);
+        result.toProperFriction();
         return result;
     }
 
@@ -39,21 +32,13 @@ public class Rational {
 
         this.numerator *= r.denominator;
         this.denominator *= r.denominator;
-
         this.numerator -= r.numerator * den;
 
         toProperFriction();
     }
     public Rational resultOfSubtraction(Rational r){
-        long num = numerator;
-        long den = denominator;
-
-        this.subtract(r);
-        Rational result = new Rational(this.numerator, this.denominator);
-
-        this.numerator = num;
-        this.denominator = den;
-
+        Rational result = new Rational(this.numerator * r.denominator - r.numerator * this.denominator, this.denominator * r.denominator);
+        result.toProperFriction();
         return result;
     }
 
@@ -64,31 +49,20 @@ public class Rational {
         toProperFriction();
     }
     public Rational resultOfMultiplication(Rational r){
-        long num = numerator;
-        long den = denominator;
-
-        this.multiply(r);
-        Rational result = new Rational(this.numerator, this.denominator);
-
-        this.numerator = num;
-        this.denominator = den;
-
+        Rational result = new Rational(this.numerator * r.numerator, this.denominator * r.denominator);
+        result.toProperFriction();
         return result;
     }
 
     public void divide(Rational r){
-        this.multiply(new Rational(r.denominator, r.numerator));
+        numerator *= r.denominator;
+        denominator *= r.numerator;
+
+        toProperFriction();
     }
     public Rational resultOfDivision(Rational r){
-        long num = numerator;
-        long den = denominator;
-
-        this.divide(r);
-        Rational result = new Rational(this.numerator, this.denominator);
-
-        this.numerator = num;
-        this.denominator = den;
-
+        Rational result = new Rational(this.numerator * r.denominator, this.denominator * r.numerator);
+        result.toProperFriction();
         return result;
     }
 
@@ -112,6 +86,11 @@ public class Rational {
                 break;
             }
         }
+    }
+
+
+    public static Rational copyOf(Rational r){
+        return new Rational(r.numerator, r.denominator);
     }
 
 

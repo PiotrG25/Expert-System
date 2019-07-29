@@ -23,15 +23,7 @@ public class Monomial {
         this.n += m.n;
     }
     public Monomial resultOfMultiplication(Monomial m){
-        Monomial before = new Monomial(new Rational(a.numerator, a.denominator), n);
-
-        this.multiply(m);
-        Monomial result = new Monomial(new Rational(this.a.numerator, this.a.denominator), this.n);
-
-        this.a = before.a;
-        this.n = before.n;
-
-        return result;
+        return new Monomial(this.a.resultOfMultiplication(m.a), this.n + m.n);
     }
 
     public void divide(Monomial m){
@@ -39,15 +31,12 @@ public class Monomial {
         this.n -= m.n;
     }
     public Monomial resultOfDivision(Monomial m){
-        Monomial before = new Monomial(new Rational(a.numerator, a.denominator), n);
+        return new Monomial(this.a.resultOfDivision(m.a), this.n - m.n);
+    }
 
-        this.divide(m);
-        Monomial result = new Monomial(new Rational(this.a.numerator, this.a.denominator), this.n);
 
-        this.a = before.a;
-        this.n = before.n;
-
-        return result;
+    public static Monomial copyOf(Monomial m){
+        return new Monomial(Rational.copyOf(m.a), m.n);
     }
 
 
