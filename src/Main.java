@@ -38,18 +38,23 @@ public class Main {
         for(Monomial m : p.getMonomials()){
             System.out.println(m);
         }
+        System.out.println();
+        for(Monomial m : r.getMonomials()){
+            System.out.println(m);
+        }
 
+        Polynomial result = p.resultOfDivision(r);
+        Polynomial rest = p.restOfDivision(r);
 
-        Rational f = new Rational(3, 2),
-                g = new Rational(15, 4);
-        System.out.println(f);
-        System.out.println(g);
-
-        Monomial m = new Monomial(f, 2),
-                n = new Monomial(g, 3);
-        System.out.println(m);
-        System.out.println(n);
-
-
+        System.out.println();
+        System.out.println();
+        System.out.println("result");
+        for(Monomial m : result.getMonomials()){
+            System.out.println(m);
+        }
+        System.out.println("rest");
+        for(Monomial m : rest.getMonomials()){
+            System.out.println(m);
+        }
     }
 }

@@ -46,6 +46,10 @@ public class Polynomial {
     }
 
     public void checkDegree(){
+        if(this.monomials.size() == 0){
+            this.degree = 0;
+            return;
+        }
         this.sort();
         this.degree = monomials.get(0).n;
     }
@@ -96,18 +100,43 @@ public class Polynomial {
         }
         return result;
     }
+    public Polynomial resultOfMultiplication(Monomial m){
+        Polynomial result = new Polynomial();
+        for(Monomial monomial : this.monomials){
+            result.addMonomial(monomial.resultOfMultiplication(m));
+        }
+        return result;
+    }
+
 
     //todo dividing polynomials
     //todo restFromDivision
-/*
+
     public Polynomial resultOfDivision(Polynomial p){
         Polynomial result = new Polynomial();
-        Polynomial currentDivident = Polynomial.copyOf(this);
+        this.sort();
+        Polynomial currentDivident = (Polynomial)this.clone();
 
+        result.addMonomial(currentDivident.getMonomials().get(0).resultOfDivision(p.getMonomials().get(0)));
+        currentDivident.subtract(p.resultOfMultiplication(result.getMonomials().get(0)));
+        currentDivident.checkDegree();
+        p.checkDegree();
+
+        for(;;){
+            if(currentDivident.degree >= p.degree){
+                result.addMonomial(currentDivident.getMonomials().get(0).resultOfDivision(p.getMonomials().get(0)));
+                currentDivident.subtract(p.resultOfMultiplication(result.getMonomials().get(result.getMonomials().size() - 1)));
+                currentDivident.checkDegree();
+            }else{
+                break;
+            }
+        }
+
+        return result;
     }
     public Polynomial restOfDivision(Polynomial p){
-
-    }*/
+        return this.resultOfSubtraction(this.resultOfDivision(p).resultOfMultiplication(p));
+    }
 
 
     @Override
