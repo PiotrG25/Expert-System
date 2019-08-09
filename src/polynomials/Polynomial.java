@@ -7,8 +7,6 @@ import java.util.List;
 
 public class Polynomial {
     private List<Monomial> monomials;
-    private int degree;
-
 
     public Polynomial(){
         monomials = new ArrayList<>();
@@ -29,6 +27,9 @@ public class Polynomial {
     }
 
     public void addMonomial(Monomial m){
+        if(m.a.numerator == 0){
+            return;
+        }
         boolean toAdd = true;
         for(int i = 0; i < monomials.size(); i++){
             if(monomials.get(i).n == m.n){
@@ -45,13 +46,14 @@ public class Polynomial {
         }
     }
 
-    public void checkDegree(){
-        if(this.monomials.size() == 0){
-            this.degree = 0;
-            return;
+    public int getDegree(){
+        int degree = 0;
+        for(Monomial m : monomials){
+            if(m.n > degree){
+                degree = m.n;
+            }
         }
-        this.sort();
-        this.degree = monomials.get(0).n;
+        return degree;
     }
 
     public List<Monomial> getMonomials() {
@@ -108,30 +110,32 @@ public class Polynomial {
         return result;
     }
 
-
-    //todo dividing polynomials
-    //todo restFromDivision
-
     public Polynomial resultOfDivision(Polynomial p){
         Polynomial result = new Polynomial();
-        this.sort();
-        Polynomial currentDivident = (Polynomial)this.clone();
 
-        result.addMonomial(currentDivident.getMonomials().get(0).resultOfDivision(p.getMonomials().get(0)));
-        currentDivident.subtract(p.resultOfMultiplication(result.getMonomials().get(0)));
-        currentDivident.checkDegree();
-        p.checkDegree();
-
-        for(;;){
-            if(currentDivident.degree >= p.degree){
-                result.addMonomial(currentDivident.getMonomials().get(0).resultOfDivision(p.getMonomials().get(0)));
-                currentDivident.subtract(p.resultOfMultiplication(result.getMonomials().get(result.getMonomials().size() - 1)));
-                currentDivident.checkDegree();
-            }else{
-                break;
-            }
+        if(this.getDegree() < p.getDegree()){
+            return result;
+        }
+        if(p.getMonomials().size() == 0){
+            System.err.println("Dividing polynomial by 0");
+            return null;
         }
 
+        p.sort();
+        Monomial pHeadMonomial = p.getMonomials().get(0);
+        Polynomial currentDivident = (Polynomial)this.clone();
+
+        for(;currentDivident.getDegree() >= p.getDegree() && currentDivident.getMonomials().size() != 0;){
+            currentDivident.sort();
+
+            Monomial currentDividentHeadMonomial = currentDivident.getMonomials().get(0);
+
+            Monomial smallestMonomialInResult = currentDividentHeadMonomial.resultOfDivision(pHeadMonomial);
+            result.addMonomial(smallestMonomialInResult);
+
+            Polynomial toSubtract = p.resultOfMultiplication(smallestMonomialInResult);
+            currentDivident.subtract(toSubtract);
+        }
         return result;
     }
     public Polynomial restOfDivision(Polynomial p){

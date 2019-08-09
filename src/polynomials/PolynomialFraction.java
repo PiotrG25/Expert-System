@@ -1,6 +1,6 @@
 package polynomials;
 
-public class Fraction {
+public class PolynomialFraction {
     public Polynomial numerator;
     public Polynomial denominator;
 
